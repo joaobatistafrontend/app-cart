@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{%block content%} 
+<h2>Listagem</h2>    
+
+
+
+  <table class=" table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Produto</th>
+        <th scope="col">Dados</th>
+        <th scope="col">Valor</th>
+        <th scope="col">*</th>
+        <th scope="col">*</th>
+        <th scope="col">*</th>
+        <th scope="col">*</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for pro in produtos %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ pro.nome }}</td>
+                <td>{{ pro.dados }}</td>
+                <td>{{ pro.valor }}</td>
+                <td><button  onclick="location.href = '{% url 'update' pro.pk  %}'" >Editar</button></td>
+                <td><button  onclick="location.href = '{% url 'deleta' pro.pk %}'" >Excluir</button></td>
+                <td><button >+</button></td>
+                <td><button >-</button></td>
+            </tr>
+      {%endfor%}
+
+    </tbody>
+  </table>
+
+{%endblock%}

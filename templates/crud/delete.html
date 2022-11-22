@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{%block content%} 
+    <form action="" method="post">{%csrf_token%}
+
+        <h2>Deleta Produto</h2> 
+            {{object.nome}}
+            {{object.dados}}
+            {{object.valor}}
+        <button type="submit">deleta</button>    
+    </form>
+
+
+    
+{%endblock%}

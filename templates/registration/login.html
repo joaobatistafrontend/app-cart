@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{%block content%}
+    <h2>Login do Usuario</h2> 
+    {%if user.is_authenticated%}
+        <p style="color: blue;">Acesso apenas para Admisitradores</p>
+    {%else%}
+        <form action="" method="post">{%csrf_token%}
+            {{form.as_p}}
+            <button type="submit">Entra</button>    
+            <a href="{% url 'password_reset'%}">Esqueci a Senha</a>
+        </form>
+    {%endif%}
+    
+{%endblock%}
