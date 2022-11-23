@@ -12,10 +12,14 @@
         <th scope="col">Produto</th>
         <th scope="col">Dados</th>
         <th scope="col">Valor</th>
-        <th scope="col">*</th>
-        <th scope="col">*</th>
-        <th scope="col">*</th>
-        <th scope="col">*</th>
+        
+        {% if perms.contenttypes.view_contenttype %}
+          <th scope="col">*</th>
+          <th scope="col">*</th>
+          <th scope="col">*</th>
+          <th scope="col">*</th>
+        {%endif%}
+
       </tr>
     </thead>
     <tbody>
@@ -24,15 +28,29 @@
                 <th scope="row">1</th>
                 <td>{{ pro.nome }}</td>
                 <td>{{ pro.dados }}</td>
-                <td>{{ pro.valor }}</td>
-                <td><button  onclick="location.href = '{% url 'update' pro.pk  %}'" >Editar</button></td>
-                <td><button  onclick="location.href = '{% url 'deleta' pro.pk %}'" >Excluir</button></td>
-                <td><button >+</button></td>
-                <td><button >-</button></td>
+                <td id="valor">{{ pro.valor }}</td>
+
+                {%if perms.core.change_produto%}
+                  <td><button  onclick="location.href = '{% url 'update' pro.pk  %}'" >Editar</button></td>
+                {%endif%}
+
+                {% if perms.core.delete_produto %}
+                  <td><button  onclick="location.href = '{% url 'deleta' pro.pk %}'" >Excluir</button></td>
+                {% endif %}
+
+                  
+                {% if perms.core.add_produto %}
+                  <td><button >+</button></td>
+                  <td><button >-</button></td>
+                {%endif%}
             </tr>
       {%endfor%}
 
     </tbody>
   </table>
 
+
+  <button id="test" onclick="test()">0</button>
+  <script src="/static/js/script.js"></script>
+  
 {%endblock%}

@@ -22,17 +22,15 @@ class ListaProduto(LoginRequiredMixin,ListView):
         context ['produtos'] = Produto.objects.all()
         return context
 
-class EditarProduto(GroupRequiredMixin,LoginRequiredMixin,UpdateView):
+class EditarProduto(LoginRequiredMixin,UpdateView):
     template_name = 'crud/update.html'
     model = Produto
     fields = '__all__'
     success_url = reverse_lazy('list')
-    group_required = u'adm'
 
 
-class DeletarProduto(GroupRequiredMixin,LoginRequiredMixin,DeleteView):
+class DeletarProduto(LoginRequiredMixin,DeleteView):
     template_name = 'crud/delete.html'
     model = Produto
     fields = '__all__'
     success_url = reverse_lazy('list')
-    group_required = u'adm'
