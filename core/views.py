@@ -18,6 +18,7 @@ class SingUPView(TemplateView):
         fomr = UserCreationForm(request.POST)
         if fomr.is_valid():
             user = fomr.save()
+            # user.user_permissions.add(20)
             return redirect('login')
         else:
             fomr = UserCreationForm()

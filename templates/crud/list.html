@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{%block content%} 
+{% block content %} 
 <h2>Listagem</h2>    
 
 
@@ -18,33 +18,33 @@
           <th scope="col">*</th>
           <th scope="col">*</th>
           <th scope="col">*</th>
-        {%endif%}
+        {% endif %}
 
       </tr>
     </thead>
     <tbody>
-        {%for pro in produtos %}
+        {% for pro in produtos %}
             <tr>
                 <th scope="row">1</th>
                 <td>{{ pro.nome }}</td>
                 <td>{{ pro.dados }}</td>
                 <td id="valor">{{ pro.valor }}</td>
 
-                {%if perms.core.change_produto%}
+                {% if perms.core.change_produto %}
                   <td><button  onclick="location.href = '{% url 'update' pro.pk  %}'" >Editar</button></td>
-                {%endif%}
+                {% endif %}
 
                 {% if perms.core.delete_produto %}
                   <td><button  onclick="location.href = '{% url 'deleta' pro.pk %}'" >Excluir</button></td>
                 {% endif %}
 
                   
-                {% if perms.core.add_produto %}
+                {% if perms.contenttypes.view_contenttype %}
                   <td><button >+</button></td>
                   <td><button >-</button></td>
-                {%endif%}
+                {% endif %}
             </tr>
-      {%endfor%}
+      {% endfor %}
 
     </tbody>
   </table>
