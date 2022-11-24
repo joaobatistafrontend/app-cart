@@ -1,7 +1,7 @@
 from django.urls import path,include
 from .views import Home,SingUPView
 from .crud import CriarProduto,ListaProduto,EditarProduto,DeletarProduto
-
+from django.conf.urls import handler400
 
 
 urlpatterns = [
@@ -12,5 +12,4 @@ urlpatterns = [
     path('list/',ListaProduto.as_view(),name='list'),
     path('update/<int:pk>',EditarProduto.as_view(),name='update'),
     path('delete/<int:pk>',DeletarProduto.as_view(),name='deleta'),
-
 ]
