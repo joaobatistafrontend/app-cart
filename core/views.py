@@ -1,7 +1,13 @@
 from django.shortcuts import render,redirect
-from django.views.generic import TemplateView
+from django.http import HttpResponse
+from django.views.generic import TemplateView,View
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Produto
+from .crud import ListaProduto
+import json
+from rest_framework import viewsets
+from .serializers import ProdutoSerializer
 
 
 
@@ -25,6 +31,23 @@ class SingUPView(TemplateView):
             return redirect('login')
         else:
             fomr = UserCreationForm()
+ 
+class DadosJson(View):
+    def get(self,request):  
+        dados = list(ListaProduto.objects.values())
+        formatados_dados = json.dump(dados, ensure_ascii = False)
+        return HttpResponse(formatados_dados, content_type = 'aplication/json')
 
-def error(request,exception):
+    
+class ProdutoViewSet(viewsets.ModelViewSet):
+    queryset = Produto.objects.all()
+    serializer_class = ProdutoSerializer
+        
+
+
+def error404(request,exception):
     return render(request,'404.html')
+
+
+def error500(request,exception):
+    return render(request,'500.html')
